@@ -25,10 +25,10 @@ const config: Config = {
         sans: ["var(--font-sans)", ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        blue: {
-          100: "#B4C6EE",
-          400: "#417BFF",
-          500: "#3371FF",
+        pink: {
+          100: "#FFBBF0",
+          400: "#FF6ADE",
+          500: "#FF00C7",
         },
         red: {
           400: "#DD4F56",
