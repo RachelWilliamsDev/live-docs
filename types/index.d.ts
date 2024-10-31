@@ -22,7 +22,19 @@ declare type SearchParamProps = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
+declare type RoomMetadata = {
+  creatorId: string;
+  email: string;
+  title: string;
+};
+
 declare type CollaborativeRoomProps = {
   roomId: string;
   roomMetadata: RoomMetadata;
+};
+
+declare type RoomDocumentProps = {
+  id: string;
+  metadata: RoomMetadata;
+  createdAt: string;
 };
