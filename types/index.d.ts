@@ -31,6 +31,8 @@ declare type RoomMetadata = {
 declare type CollaborativeRoomProps = {
   roomId: string;
   roomMetadata: RoomMetadata;
+  users: User[];
+  currentUserType: UserType;
 };
 
 declare type RoomDocumentProps = {
@@ -38,3 +40,14 @@ declare type RoomDocumentProps = {
   metadata: RoomMetadata;
   createdAt: string;
 };
+
+declare type User = {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
+  color: string;
+  userType?: UserType;
+};
+
+declare type ThreadWrapperProps = { thread: ThreadData<BaseMetadata> };
