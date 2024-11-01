@@ -147,7 +147,9 @@ export const removeCollaborator = async ({
 
     revalidatePath(`/documents/${roomId}`);
     return parseStringify(updatedRoom);
-  } catch (error) {}
+  } catch (error) {
+    console.log(`Error happened while removing a collaborator: ${error}`);
+  }
 };
 
 export const deleteDocument = async (roomId: string) => {

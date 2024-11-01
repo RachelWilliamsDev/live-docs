@@ -11,6 +11,7 @@ import { ReactNode } from "react";
 
 const Provider = ({ children }: { children: ReactNode }) => {
   const { user: clerkUser } = useUser();
+  const emailAddress = clerkUser?.emailAddresses[0]?.emailAddress;
 
   return (
     <LiveblocksProvider
@@ -21,9 +22,11 @@ const Provider = ({ children }: { children: ReactNode }) => {
         return users;
       }}
       resolveMentionSuggestions={async ({ text, roomId }) => {
+        if (!emailAddress) return []; // Return an empty array or handle undefined case as needed
+
         const roomUsers = await getDocumentUsers({
           roomId,
-          currentUser: clerkUser?.emailAddresses[0].emailAddress!,
+          currentUser: emailAddress,
           text,
         });
 
