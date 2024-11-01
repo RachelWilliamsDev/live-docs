@@ -35,10 +35,13 @@ declare type CollaborativeRoomProps = {
   currentUserType: UserType;
 };
 
+declare type UsersAccesses = Record<string, string[]>;
+
 declare type RoomDocumentProps = {
   id: string;
   metadata: RoomMetadata;
   createdAt: string;
+  usersAccesses: UsersAccesses;
 };
 
 declare type User = {
