@@ -12,12 +12,13 @@ import { redirect } from "next/navigation";
 
 const Home = async () => {
   const clerkUser = await currentUser();
-  const email = clerkUser?.emailAddresses[0].emailAddress!;
-  if (!clerkUser) redirect("/sign-in");
 
-  const roomDocuments = await getDocuments(
-    clerkUser.emailAddresses[0].emailAddress
-  );
+  if (!clerkUser || !clerkUser.emailAddresses[0]?.emailAddress) {
+    return redirect("/sign-in");
+  }
+
+  const email = clerkUser.emailAddresses[0].emailAddress;
+  const roomDocuments = await getDocuments(email);
 
   return (
     <main className="home-container">
@@ -33,10 +34,7 @@ const Home = async () => {
         <div className="document-list-container">
           <div className="document-list-title">
             <h3 className="text-28-semi-bold">All Documents</h3>
-            <AddDocumentBtn
-              userId={clerkUser.id}
-              email={clerkUser.emailAddresses[0].emailAddress}
-            />
+            <AddDocumentBtn userId={clerkUser.id} email={email} />
           </div>
           <ul className="document-ul">
             {roomDocuments.data.map(
@@ -62,7 +60,6 @@ const Home = async () => {
                     <div className="space-y-1">
                       <p className="line-clamp-1 text-lg">{metadata.title}</p>
                       <p className="text-sm font-light text-blue-100">
-                        {" "}
                         Created about {dateConverter(createdAt)}
                       </p>
                     </div>
@@ -85,10 +82,7 @@ const Home = async () => {
             height={40}
             className="mx-auto"
           />
-          <AddDocumentBtn
-            userId={clerkUser.id}
-            email={clerkUser.emailAddresses[0].emailAddress}
-          />
+          <AddDocumentBtn userId={clerkUser.id} email={email} />
         </div>
       )}
     </main>
