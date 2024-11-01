@@ -2,6 +2,7 @@
 
 import { nanoid } from "nanoid";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { liveblocks } from "../liveblocks";
 import { getAccessType, parseStringify } from "../utils";
 
@@ -133,4 +134,15 @@ export const removeCollaborator = async ({
     revalidatePath(`/documents/${roomId}`);
     return parseStringify(updatedRoom);
   } catch (error) {}
+};
+
+export const deleteDocument = async (roomId: string) => {
+  try {
+    await liveblocks.deleteRoom(roomId);
+
+    revalidatePath("/");
+    redirect("/");
+  } catch (error) {
+    console.log(`Error happened while deleting a room: ${error}`);
+  }
 };
