@@ -81,3 +81,5 @@ declare type ShareDocumentParams = {
 };
 
 declare type AccessType = ["room:write"] | ["room:read", "room:presence:write"];
+
+declare type DeleteModalProps = { roomId: string };
